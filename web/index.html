@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthLab Diagnostic Centre - Complete Diagnostic Care for a Healthier Tomorrow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+
+  <!-- ========================================================= -->
+  <!-- TOP NOTIFICATION & CONTACT STRIP                          -->
+  <!-- ========================================================= -->
+  <header class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-left">
+        <span class="badge-nabl" id="top-bar-badge">NABL Certified & ISO 9001:2015</span>
+        <span class="hours" id="top-bar-hours">⏰ Mon - Sun, 6:00 AM - 10:00 PM</span>
+      </div>
+      <div class="top-right">
+        <a href="tel:+919876543210" class="phone-link" id="top-bar-phone-link">
+          <span class="phone-icon">📞</span>
+          <strong id="top-bar-phone">+91 98765 43210</strong>
+        </a>
+        <a href="/portal" data-route="portal" class="nav-portal-btn"
+          onclick="navigateTo('portal'); closeMobileNav()"><span>📄</span> <span id="header-portal-btn-text">Patient
+            Portal</span></a>
+
+        <a href="/portal" class="btn-top-cta" onclick="navigateTo('portal')">Download Report</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- MAIN NAVIGATION (Clean White Header matching Reference)   -->
+  <!-- ========================================================= -->
+  <nav class="main-nav">
+    <div class="container nav-inner">
+      <!-- Logo -->
+      <a href="/home" class="logo" onclick="navigateTo('home')">
+        <div class="logo-mark">
+          <span class="plus-icon">+</span>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title" id="header-brand-title">HealthLab</span>
+          <span class="logo-sub" id="header-brand-tagline">Diagnostic Centre</span>
+        </div>
+      </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <!-- Center Nav Links -->
+        <ul class="nav-links" id="main-nav-links-list">
+          <li><a href="/home" data-route="home" class="nav-link active"
+              onclick="navigateTo('home'); closeMobileNav()">Home</a></li>
+          <li><a href="/tests" data-route="tests" class="nav-link" onclick="navigateTo('tests'); closeMobileNav()">Tests
+              & Packages</a></li>
+          <li><a href="/packages" data-route="packages" class="nav-link"
+              onclick="navigateTo('packages'); closeMobileNav()">Health Checkup</a></li>
+          <li><a href="/guide" data-route="guide" class="nav-link"
+              onclick="navigateTo('guide'); closeMobileNav()">Patient Guide</a></li>
+          <li><a href="/about" data-route="about" class="nav-link" onclick="navigateTo('about'); closeMobileNav()">About
+              Us</a></li>
+          <li><a href="/contact" data-route="contact" class="nav-link"
+              onclick="navigateTo('contact'); closeMobileNav()">Contact</a></li>
+        </ul>
+
+        <!-- Action Buttons -->
+        <div class="nav-actions">
+
+          <button class="btn-primary" id="header-book-btn" onclick="setQuickBooking(); closeMobileNav()">Book a
+            Test</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div id="web-toast" class="web-toast"></div>
+
+  <!-- ========================================================= -->
+  <!-- MAIN APP CONTAINER (Multi-Page Views)                     -->
+  <!-- ========================================================= -->
+  <main id="app-content">
+
+    <!-- ======================================================== -->
+    <!-- PAGE 1: HOME PAGE (Matches Reference Mockup Image)       -->
+    <!-- ======================================================== -->
+    <div id="page-home" class="page-view active">
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <span class="hero-badge" id="hero-eyebrow-text">YOUR HEALTH. OUR PRIORITY.</span>
+            <h1 class="hero-title" id="hero-headline-elem">
+              Complete Diagnostic Care for a
+              <span class="text-highlight">Healthier Tomorrow</span>
+            </h1>
+            <p class="hero-subtitle" id="hero-subtext-elem">
+              Accurate Reports | Advanced Technology | Trusted by Thousands
+            </p>
+
+            <div class="hero-pill-badges" id="hero-features-list">
+              <div class="pill-item">
+                <span class="pill-icon">🏠</span>
+                <span class="pill-text">Home Sample Collection</span>
+              </div>
+              <div class="pill-item">
+                <span class="pill-icon">📄</span>
+                <span class="pill-text">Accurate Reports</span>
+              </div>
+              <div class="pill-item">
+                <span class="pill-icon">🛡️</span>
+                <span class="pill-text">NABL Certified Lab</span>
+              </div>
+              <div class="pill-item">
+                <span class="pill-icon">₹</span>
+                <span class="pill-text">Affordable Pricing</span>
+              </div>
+              <div class="pill-item">
+                <span class="pill-icon">🔬</span>
+                <span class="pill-text">All Diagnostic Services</span>
+              </div>
+            </div>
+
+            <div class="hero-cta-group">
+              <button class="btn-hero-primary" id="hero-btn-primary" onclick="setQuickBooking()">Book a Test Now
+                ➔</button>
+              <a href="/packages" class="btn-hero-secondary" id="hero-btn-secondary"
+                onclick="navigateTo('packages')">View Health Packages</a>
+            </div>
+          </div>
+
+          <!-- Hero Visual Column -->
+          <div class="hero-visual-col">
+            <div class="hero-image-wrapper">
+              <img src="/images/healthlab_hero_scientist.jpg" alt="HealthLab Diagnostic Scientist" class="hero-main-img"
+                id="hero-main-img" />
+              <div class="floating-quote-badge" id="hero-quote-badge">
+                <span class="quote-text" id="hero-quote-text">Health Begins with Awareness ❤️</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrated Booking Box -->
+        <div class="container" style="margin-top: 40px;">
+          <div id="booking" class="booking-card hero-booking-bar">
+            <div class="booking-card-header">
+              <h3>⚡ Quick Test / Health Checkup Booking</h3>
+              <p>Fast pathology registration & doorstep home sample collection</p>
+            </div>
+            <form id="booking-form" class="booking-form">
+              <div class="form-group">
+                <label>Select Test / Package</label>
+                <select id="booking-test" required>
+                  <option value="">-- Choose Test or Package --</option>
+                  <option value="Basic Health Checkup (₹699)">Basic Health Checkup - ₹699</option>
+                  <option value="Executive Health Checkup (₹1,499)">Executive Health Checkup - ₹1,499</option>
+                  <option value="Diabetic Care Package (₹899)">Diabetic Care Package - ₹899</option>
+                  <option value="Full Body Checkup (₹2,499)">Full Body Checkup - ₹2,499</option>
+                  <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC) - ₹450</option>
+                  <option value="Lipid Profile & Heart Marker">Lipid Profile & Heart Marker - ₹850</option>
+                  <option value="Liver Function Test (LFT)">Liver Function Test (LFT) - ₹750</option>
+                  <option value="Kidney Function Test (KFT)">Kidney Function Test (KFT) - ₹750</option>
+                  <option value="Thyroid Profile Total (T3, T4, TSH)">Thyroid Profile Total - ₹650</option>
+                  <option value="Vitamin D & B12 Combo">Vitamin D & B12 Combo - ₹1,100</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label>Select Date</label>
+                  <input type="date" id="booking-date" required />
+                </div>
+                <div class="form-group col-6">
+                  <label>Select Time Slot</label>
+                  <select id="booking-time" required>
+                    <option value="07:00 AM">07:00 AM - 08:00 AM</option>
+                    <option value="08:30 AM" selected>08:30 AM - 09:30 AM</option>
+                    <option value="10:00 AM">10:00 AM - 11:00 AM</option>
+                    <option value="11:30 AM">11:30 AM - 12:30 PM</option>
+                    <option value="04:00 PM">04:00 PM - 05:00 PM</option>
+                    <option value="06:00 PM">06:00 PM - 07:00 PM</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Choose Visit Type</label>
+                <div class="visit-type-radios">
+                  <label class="radio-chip">
+                    <input type="radio" name="visit_type" value="lab_visit" checked />
+                    <span>🏥 Lab Visit</span>
+                  </label>
+                  <label class="radio-chip">
+                    <input type="radio" name="visit_type" value="home_collection" />
+                    <span>🏠 Home Collection</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Patient Full Name</label>
+                <input type="text" id="patient-name" placeholder="Enter patient's full name" required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label>Phone Number</label>
+                  <input type="tel" id="patient-phone" placeholder="+91 98765 00000" required />
+                </div>
+                <div class="form-group col-6">
+                  <label>Email Address</label>
+                  <input type="email" id="patient-email" placeholder="patient@example.com" />
+                </div>
+              </div>
+
+              <div class="form-group" id="address-group" style="display: none;">
+                <label>Complete Address (for Home Collection)</label>
+                <input type="text" id="patient-address" placeholder="House No, Street, Landmark, Pincode" />
+              </div>
+
+              <button type="submit" class="btn-submit-booking">Book Now ➔</button>
+              <div class="form-trust-text">🔒 Real-time synchronization with MySQL: healthlab_db</div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics Bar -->
+      <section class="stats-bar">
+        <div class="container stats-grid" id="stats-counter-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <h3 id="stat-1-val">50,000+</h3>
+              <p id="stat-1-lbl">Happy Patients</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-info">
+              <h3 id="stat-2-val">1,000+</h3>
+              <p id="stat-2-lbl">Tests & Profiles</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-info">
+              <h3 id="stat-3-val">4.8 / 5</h3>
+              <p id="stat-3-lbl">Patient Rating</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🏅</div>
+            <div class="stat-info">
+              <h3 id="stat-4-val">NABL</h3>
+              <p id="stat-4-lbl">Certified Laboratory</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Diagnostic Services -->
+      <section class="services-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Our Diagnostic Services</h2>
+              <p class="section-subtitle">Wide range of tests for you and your family's complete health.</p>
+            </div>
+            <a href="/tests" class="view-all-link" onclick="navigateTo('tests')">View All Tests ➔</a>
+          </div>
+
+          <div class="services-grid" id="services-container">
+            <div class="service-card" onclick="selectServiceForBooking('Blood Tests')">
+              <div class="service-icon-wrap icon-red">🩸</div>
+              <h4>Blood Tests</h4>
+              <p>Complete blood count, ESR & hematology profiles</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Urine Tests')">
+              <div class="service-icon-wrap icon-amber">🧪</div>
+              <h4>Urine Tests</h4>
+              <p>Routine & advanced microscopic urine analysis</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Stool Tests')">
+              <div class="service-icon-wrap icon-blue">🔬</div>
+              <h4>Stool Tests</h4>
+              <p>Infection & digestive wellness screening</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Hormone Tests')">
+              <div class="service-icon-wrap icon-purple">🧬</div>
+              <h4>Hormone Tests</h4>
+              <p>Thyroid, diabetes, and reproductive fertility panels</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Vitamin & Mineral Tests')">
+              <div class="service-icon-wrap icon-pink">💊</div>
+              <h4>Vitamin & Mineral</h4>
+              <p>Vitamin D, B12, Calcium & vital micronutrients</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Liver Function Tests')">
+              <div class="service-icon-wrap icon-maroon">🫀</div>
+              <h4>Liver Function Tests</h4>
+              <p>Assess liver enzymes, SGOT, SGPT and bilirubin</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Kidney Function Tests')">
+              <div class="service-icon-wrap icon-teal">🩺</div>
+              <h4>Kidney Function Tests</h4>
+              <p>Creatinine, BUN, electrolytes & renal markers</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Heart Health Tests')">
+              <div class="service-icon-wrap icon-crimson">❤️</div>
+              <h4>Heart Health Tests</h4>
+              <p>Cholesterol, lipid profile, and cardiac screen</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Diabetes Tests')">
+              <div class="service-icon-wrap icon-orange">🩸</div>
+              <h4>Diabetes Tests</h4>
+              <p>HbA1c, fasting & post-prandial glucose</p>
+            </div>
+            <div class="service-card" onclick="selectServiceForBooking('Cancer Markers')">
+              <div class="service-icon-wrap icon-rose">🎗️</div>
+              <h4>Cancer Markers</h4>
+              <p>Early tumor screening markers (PSA, CA-125)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Popular Health Checkup Packages & Home Collection Feature -->
+      <section class="packages-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Popular Health Checkup Packages</h2>
+              <p class="section-subtitle">Specially designed for every age and lifestyle.</p>
+            </div>
+            <a href="/packages" class="view-all-link" onclick="navigateTo('packages')">View All Packages ➔</a>
+          </div>
+
+          <div class="packages-layout">
+            <div class="packages-grid" id="packages-container">
+              <!-- Card 1 -->
+              <div class="package-card">
+                <div class="pkg-header">
+                  <span class="pkg-icon">🩺</span>
+                  <h3>Basic Health Checkup</h3>
+                  <p class="pkg-tagline">Essential tests for your routine health</p>
+                </div>
+                <div class="pkg-price-row">
+                  <span class="currency">₹</span>
+                  <span class="amount">699</span>
+                  <span class="original-price">₹1,200</span>
+                </div>
+                <button class="btn-package" onclick="selectPackageForBooking('Basic Health Checkup (₹699)')">Book
+                  Now</button>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="package-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="pkg-header">
+                  <span class="pkg-icon">⏱️</span>
+                  <h3>Executive Health Checkup</h3>
+                  <p class="pkg-tagline">A complete health assessment for busy lifestyles</p>
+                </div>
+                <div class="pkg-price-row">
+                  <span class="currency">₹</span>
+                  <span class="amount">1,499</span>
+                  <span class="original-price">₹2,800</span>
+                </div>
+                <button class="btn-package" onclick="selectPackageForBooking('Executive Health Checkup (₹1,499)')">Book
+                  Now</button>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="package-card">
+                <div class="pkg-header">
+                  <span class="pkg-icon">🩺</span>
+                  <h3>Diabetic Care Package</h3>
+                  <p class="pkg-tagline">Monitor & manage your metabolic health</p>
+                </div>
+                <div class="pkg-price-row">
+                  <span class="currency">₹</span>
+                  <span class="amount">899</span>
+                  <span class="original-price">₹1,600</span>
+                </div>
+                <button class="btn-package" onclick="selectPackageForBooking('Diabetic Care Package (₹899)')">Book
+                  Now</button>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="package-card featured">
+                <div class="pkg-header">
+                  <span class="pkg-icon">🛡️</span>
+                  <h3>Full Body Checkup</h3>
+                  <p class="pkg-tagline">Comprehensive testing for total family wellness</p>
+                </div>
+                <div class="pkg-price-row">
+                  <span class="currency">₹</span>
+                  <span class="amount">2,499</span>
+                  <span class="original-price">₹4,500</span>
+                </div>
+                <button class="btn-package" onclick="selectPackageForBooking('Full Body Checkup (₹2,499)')">Book
+                  Now</button>
+              </div>
+            </div>
+
+            <!-- Home Sample Collection Feature Box -->
+            <div class="home-collection-card">
+              <div class="hc-media">
+                <img src="/images/healthlab_home_sample_boy.jpg" alt="Home Sample Collection Professional" />
+              </div>
+              <div class="hc-content">
+                <span class="hc-badge">Doorstep Service</span>
+                <h3>Home Sample Collection</h3>
+                <p class="hc-lead">Your Comfort, Our Priority</p>
+                <ul class="hc-list">
+                  <li><span>🛡️</span> Safe & Hygienic Sealed Vacuum Tubes</li>
+                  <li><span>👨‍⚕️</span> Trained & Certified Phlebotomists</li>
+                  <li><span>⏱️</span> Guaranteed On-Time Sample Pickup</li>
+                  <li><span>📱</span> Digital Reports via WhatsApp & Email</li>
+                </ul>
+                <button class="btn-home-coll" onclick="selectHomeCollection()">Book Home Collection ➔</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose HealthLab -->
+      <section class="why-section">
+        <div class="container">
+          <h2 class="section-title text-center">Why Choose HealthLab?</h2>
+          <p class="section-subtitle text-center">Delivering excellence with world-class pathology standards.</p>
+
+          <div class="why-grid">
+            <div class="why-card">
+              <span class="why-icon">🏅</span>
+              <h4>NABL Certified Lab</h4>
+              <p>Stringent internal and external quality control benchmarks.</p>
+            </div>
+            <div class="why-card">
+              <span class="why-icon">🔬</span>
+              <h4>Advanced Equipment</h4>
+              <p>Fully automated robotic analyzers from Roche, Abbott & Beckman.</p>
+            </div>
+            <div class="why-card">
+              <span class="why-icon">⚡</span>
+              <h4>Accurate & Fast Reports</h4>
+              <p>Same-day online report delivery via secure portal and WhatsApp.</p>
+            </div>
+            <div class="why-card">
+              <span class="why-icon">👨‍⚕️</span>
+              <h4>Experienced Pathologists</h4>
+              <p>MD pathologists verify and sign off each diagnostic finding.</p>
+            </div>
+            <div class="why-card">
+              <span class="why-icon">🏷️</span>
+              <h4>Affordable Pricing</h4>
+              <p>Transparent rates with zero hidden laboratory fees.</p>
+            </div>
+            <div class="why-card">
+              <span class="why-icon">🏠</span>
+              <h4>Home Collection Facility</h4>
+              <p>Trained medical phlebotomists arrive at your convenient hour.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chief Pathologist & Central Laboratory Facility Showcase -->
+      <section class="facility-showcase-section" id="doctor-facility-section"
+        style="padding: 60px 0; background: #F8FAFC; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
+        <div class="container">
+          <div class="text-center" style="margin-bottom: 36px;">
+            <span class="step-tag" style="background:#E0F2FE; color:#0284C7;">CLINICAL LEADERSHIP</span>
+            <h2 class="section-title">Chief Pathologist & Central Facility</h2>
+            <p class="section-subtitle">Verified findings under renowned laboratory experts and international quality
+              standards.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch;">
+            <!-- Chief Pathologist Card -->
+            <div
+              style="background: #FFFFFF; border-radius: 16px; padding: 28px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                <img src="/images/healthlab_hero_scientist.jpg" id="doc-img" alt="Chief Pathologist"
+                  style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #00897B;" />
+                <div>
+                  <h3 id="doc-name-text" style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0 0 4px;">Dr.
+                    Rajesh Sharma</h3>
+                  <div id="doc-degrees-text" style="color: #00897B; font-weight: 700; font-size: 14px;">MBBS, MD
+                    (Pathology), MIAC</div>
+                  <div id="doc-spec-text" style="color: #64748B; font-size: 13px;">Chief Pathologist & Lab Director
+                  </div>
+                  <span id="doc-exp-badge"
+                    style="display: inline-block; margin-top: 6px; background: #DCFCE7; color: #166534; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 9999px;">18+
+                    Years Experience</span>
+                </div>
+              </div>
+              <p id="doc-bio-text" style="color: #475569; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">
+                Pioneering automated clinical chemistry and diagnostic reliability with over 18 years of experience
+                overseeing comprehensive laboratory panels, oncology histopathology, and genomic biomarkers.
+              </p>
+              <div
+                style="margin-bottom: 16px; background: #F1F5F9; padding: 12px 16px; border-radius: 10px; font-size: 13px; color: #334155;">
+                <strong>Consultation Hours:</strong> <span id="doc-schedule-text">Mon - Sat: 9:00 AM - 5:00 PM</span>
+              </div>
+              <div style="margin-top: auto;">
+                <h5
+                  style="font-size: 13px; font-weight: 700; color: #0F172A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+                  Key Qualifications & Accreditations</h5>
+                <ul id="doc-highlights-list"
+                  style="margin: 0; padding-left: 18px; font-size: 13px; color: #475569; line-height: 1.6;">
+                  <li>Certified Lead Auditor for ISO 15189 Medical Laboratories</li>
+                  <li>Fellow in Oncopathology & Advanced Hematology</li>
+                  <li>Published 25+ International Pathology Papers</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Central Laboratory Facility Card -->
+            <div
+              style="background: #FFFFFF; border-radius: 16px; padding: 28px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div style="margin-bottom: 16px; overflow: hidden; border-radius: 12px; height: 160px;">
+                <img src="/images/healthlab_clinic_interior.jpg" id="facility-img" alt="HealthLab Central Facility"
+                  style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+              <h3 id="facility-name-text" style="font-size: 20px; font-weight: 800; color: #0F172A; margin: 0 0 6px;">
+                HealthLab Central Diagnostic Centre</h3>
+              <p id="facility-address-text" style="color: #64748B; font-size: 13px; margin: 0 0 10px;">
+                Plot 42, Healthcare City, Ring Road, Diagnostic Hub, New Delhi - 110001
+              </p>
+              <div id="facility-directions-text"
+                style="background: #FEF3C7; color: #92400E; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; margin-bottom: 16px;">
+                Opposite Metro Pillar 148, Near Apex Heart Institute
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; margin-top: auto;">
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 14px; border-radius: 10px;">
+                  <span style="color: #64748B; display: block; font-size: 11px;">Helpline Phone</span>
+                  <strong id="facility-helpline-text" style="color: #0F172A;">+91 98765 43210</strong>
+                </div>
+                <div style="background: #FEF2F2; border: 1px solid #FEE2E2; padding: 10px 14px; border-radius: 10px;">
+                  <span style="color: #DC2626; display: block; font-size: 11px;">Critical Alerts 24x7</span>
+                  <strong id="facility-emergency-text" style="color: #DC2626;">+91 98765 43299</strong>
+                </div>
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 14px; border-radius: 10px;">
+                  <span style="color: #64748B; display: block; font-size: 11px;">Lab Email</span>
+                  <strong id="facility-email-text" style="color: #0F172A;">care@healthlab.com</strong>
+                </div>
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 14px; border-radius: 10px;">
+                  <span style="color: #64748B; display: block; font-size: 11px;">Operating Timings</span>
+                  <strong id="facility-timings-text" style="color: #0F172A;">Mon - Sun: 6:00 AM - 10:00 PM</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works (4 Simple Steps) -->
+      <section class="how-section">
+        <div class="container">
+          <div class="text-center">
+            <span class="step-tag">Easy Process</span>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get your test done in 4 simple steps.</p>
+          </div>
+
+          <div class="steps-container">
+            <div class="step-item">
+              <div class="step-circle">1</div>
+              <h4>Book a Test</h4>
+              <p>Online or call our helpline +91 98765 43210</p>
+            </div>
+            <div class="step-divider">➔</div>
+            <div class="step-item">
+              <div class="step-circle">2</div>
+              <h4>Sample Collection</h4>
+              <p>Visit lab or choose home collection</p>
+            </div>
+            <div class="step-divider">➔</div>
+            <div class="step-item">
+              <div class="step-circle">3</div>
+              <h4>Testing at Our Lab</h4>
+              <p>With advanced automated technology</p>
+            </div>
+            <div class="step-divider">➔</div>
+            <div class="step-item">
+              <div class="step-circle">4</div>
+              <h4>Get Reports</h4>
+              <p>Download online or via WhatsApp</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- What Our Patients Say -->
+      <section class="testimonials-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">What Our Patients Say</h2>
+              <p class="section-subtitle">Real experiences. Real trust.</p>
+            </div>
+            <div class="nav-arrows">
+              <button class="arrow-btn" id="prev-review">‹</button>
+              <button class="arrow-btn" id="next-review">›</button>
+            </div>
+          </div>
+
+          <div class="testimonials-grid" id="reviews-container">
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p class="review-quote">"Very professional and prompt service. Home collection was so convenient!"</p>
+              <div class="review-author">
+                <img src="/images/testimonials/avatar1.png" alt="Priya Sharma" class="avatar-img" />
+                <div>
+                  <h5>Priya Sharma</h5>
+                  <span>Verified Patient</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p class="review-quote">"Reports are accurate and delivered on time. Highly recommended!"</p>
+              <div class="review-author">
+                <img src="/images/testimonials/avatar2.png" alt="Amit Verma" class="avatar-img" />
+                <div>
+                  <h5>Amit Verma</h5>
+                  <span>Verified Patient</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p class="review-quote">"Friendly staff and clean facilities. Great experience with executive checkup!"
+              </p>
+              <div class="review-author">
+                <img src="/images/testimonials/avatar3.png" alt="Neha Singh" class="avatar-img" />
+                <div>
+                  <h5>Neha Singh</h5>
+                  <span>Verified Patient</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Health Tools & Test Prep Section -->
+      <section class="tools-section" style="padding: 50px 0; background: #F8FAFC; border-top: 1px solid #E2E8F0;">
+        <div class="container">
+          <div class="section-header" style="text-align: center; margin-bottom: 30px;">
+            <span
+              style="background:#E0F2FE; color:#0284C7; padding:6px 14px; border-radius:20px; font-weight:700; font-size:14px;">CLINICAL
+              TOOLS & CALCULATORS</span>
+            <h2 class="section-title" style="font-size:32px; font-weight:800; margin-top:10px;">BMI & Daily Water Target
+              Calculator</h2>
+            <p class="section-subtitle" style="color:#64748B; font-size:16px;">Instant clinical assessment synced
+              directly with diagnostic recommendations</p>
+          </div>
+
+          <div
+            style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:28px; align-items:start;">
+            <!-- BMI Calculator Card -->
+            <div
+              style="background:#fff; border-radius:18px; padding:32px; border:1px solid #E2E8F0; box-shadow:0 4px 14px rgba(0,0,0,0.03);">
+              <h3 style="font-size:22px; font-weight:800; color:#0F172A; margin-bottom:18px;">📊 Calculate Your BMI &
+                Water Target</h3>
+              <form id="web-bmi-form" onsubmit="event.preventDefault(); calculateWebBmi();">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px;">
+                  <div>
+                    <label
+                      style="font-size:15px; font-weight:700; color:#475569; display:block; margin-bottom:6px;">Weight
+                      (kg)</label>
+                    <input type="number" id="web-bmi-weight" value="70" required
+                      style="width:100%; padding:12px 14px; border:1px solid #CBD5E1; border-radius:10px; font-size:15.5px;" />
+                  </div>
+                  <div>
+                    <label
+                      style="font-size:15px; font-weight:700; color:#475569; display:block; margin-bottom:6px;">Height
+                      (cm)</label>
+                    <input type="number" id="web-bmi-height" value="172" required
+                      style="width:100%; padding:12px 14px; border:1px solid #CBD5E1; border-radius:10px; font-size:15.5px;" />
+                  </div>
+                </div>
+                <button type="submit" class="btn-primary"
+                  style="width:100%; padding:14px; border-radius:10px; font-weight:700; font-size:16px;">Calculate BMI &
+                  Hydration</button>
+              </form>
+              <div id="web-bmi-result" style="margin-top:18px;"></div>
+            </div>
+
+            <!-- Diagnostic Test Prep Guides -->
+            <div
+              style="background:#fff; border-radius:18px; padding:32px; border:1px solid #E2E8F0; box-shadow:0 4px 14px rgba(0,0,0,0.03);">
+              <h3 style="font-size:22px; font-weight:800; color:#0F172A; margin-bottom:18px;">📋 Diagnostic Fasting &
+                Prep Instructions</h3>
+              <div id="web-prep-guides-container">
+                <div
+                  style="padding:14px 16px; background:#F8FAFC; border-left:4px solid #0284C7; border-radius:8px; margin-bottom:12px;">
+                  <strong style="color:#0F172A; font-size:17.5px;">Fasting Blood Sugar & Lipid Profile</strong>
+                  <p style="margin:6px 0 0; font-size:17.5px; color:#475569; line-height:1.7;">Fast for 10-12 hours
+                    overnight. Water is allowed.</p>
+                </div>
+                <div
+                  style="padding:14px 16px; background:#F8FAFC; border-left:4px solid #0284C7; border-radius:8px; margin-bottom:12px;">
+                  <strong style="color:#0F172A; font-size:17.5px;">Complete Urine Examination</strong>
+                  <p style="margin:6px 0 0; font-size:17.5px; color:#475569; line-height:1.7;">Collect mid-stream first
+                    morning sample in sterile container.</p>
+                </div>
+                <div style="padding:14px 16px; background:#F8FAFC; border-left:4px solid #0284C7; border-radius:8px;">
+                  <strong style="color:#0F172A; font-size:17.5px;">Thyroid Profile (T3, T4, TSH)</strong>
+                  <p style="margin:6px 0 0; font-size:17.5px; color:#475569; line-height:1.7;">Take morning thyroid
+                    medications only after blood draw.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest Health Tips & Articles + Help Card -->
+      <section class="articles-section">
+        <div class="container">
+          <div class="articles-layout">
+            <div class="articles-main">
+              <div class="section-header">
+                <div>
+                  <h2 class="section-title">Latest Health Tips & Articles</h2>
+                  <p class="section-subtitle">Stay informed. Stay healthy.</p>
+                </div>
+              </div>
+
+              <div class="articles-grid" id="articles-container">
+                <div class="article-card">
+                  <img src="/images/healthlab_blog_nutrition.png" alt="Healthy Nutrition" />
+                  <div class="article-body">
+                    <span class="article-date">12 Sep 2026</span>
+                    <h4>10 Essential Tests Everyone Should Do Once a Year</h4>
+                    <p style="font-size:17.5px; color:#475569; margin:8px 0 14px; line-height:1.7;">Preventative
+                      screening provides early detection of metabolic shifts before symptoms manifest.</p>
+                    <button class="read-more" onclick="setQuickBooking()">Book Annual Test ➔</button>
+                  </div>
+                </div>
+
+                <div class="article-card">
+                  <img src="/images/healthlab_blog_heart.png" alt="Heart Health" />
+                  <div class="article-body">
+                    <span class="article-date">08 Sep 2026</span>
+                    <h4>How to Keep Your Heart Healthy Naturally</h4>
+                    <p style="font-size:17.5px; color:#475569; margin:8px 0 14px; line-height:1.7;">Understand your
+                      Lipid Profile targets, HDL/LDL ratios, and lifestyle modifications for cardiac protection.</p>
+                    <button class="read-more"
+                      onclick="selectPackageForBooking('Executive Health Checkup (₹1,499)')">Check Heart Profile
+                      ➔</button>
+                  </div>
+                </div>
+
+                <div class="article-card">
+                  <img src="/images/healthlab_blog_vitamind.png" alt="Vitamin D" />
+                  <div class="article-body">
+                    <span class="article-date">05 Sep 2026</span>
+                    <h4>The Importance of Vitamin D for a Stronger You</h4>
+                    <p style="font-size:17.5px; color:#475569; margin:8px 0 14px; line-height:1.7;">Over 70% of urban
+                      population suffers from vitamin D deficiency, causing lethargy and bone density loss.</p>
+                    <button class="read-more" onclick="selectServiceForBooking('Vitamin & Mineral Tests')">Test Vitamin
+                      Levels ➔</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Need Help Sidebar Widget -->
+            <div class="help-sidebar-card">
+              <div class="help-header">
+                <span class="headset-icon">🎧</span>
+                <h3>Need Help?</h3>
+                <p>We're Here for You</p>
+              </div>
+              <div class="help-links">
+                <a href="tel:+919876543210" class="help-item">
+                  <span class="h-icon">📞</span>
+                  <div>
+                    <strong>+91 98765 43210</strong>
+                    <small>Mon - Sun, 6 AM - 10 PM</small>
+                  </div>
+                </a>
+                <a href="https://wa.me/919876543210" target="_blank" class="help-item">
+                  <span class="h-icon">💬</span>
+                  <div>
+                    <strong>Chat on WhatsApp</strong>
+                    <small>Instant booking & report download</small>
+                  </div>
+                </a>
+                <a href="mailto:info@healthlab.in" class="help-item">
+                  <span class="h-icon">✉️</span>
+                  <div>
+                    <strong>info@healthlab.in</strong>
+                    <small>Send your doctor's prescription</small>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Facility Gallery & Map Section -->
+      <section class="facility-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Our Diagnostic Centre</h2>
+              <p class="section-subtitle">A modern, comfortable and patient-friendly facility.</p>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="view-all-link">View on Google Maps ➔</a>
+          </div>
+
+          <div class="facility-grid">
+            <div class="gallery-col">
+              <img src="/images/healthlab_clinic_interior.jpg" alt="HealthLab Diagnostic Centre Reception & Lounge"
+                class="facility-img" />
+            </div>
+            <div class="map-card">
+              <div class="map-inner">
+                <div class="map-pin">📍</div>
+                <h4>HealthLab Diagnostic Centre</h4>
+                <p>123 Wellness Avenue, Green Park, New Delhi - 110016</p>
+                <p><strong>Landmark:</strong> Near Green Park Metro Gate #2</p>
+                <p><strong>Helpline:</strong> +91 98765 43210 | care@healthlab.in</p>
+                <a href="https://maps.google.com" target="_blank" class="btn-map">Open in Google Maps ➔</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom CTA Banner -->
+      <section class="banner-cta-section">
+        <div class="container banner-inner">
+          <div class="banner-text">
+            <h2>Because a Healthier Tomorrow Starts Today.</h2>
+            <p>Book your test now and take a step towards a healthier you and your family.</p>
+          </div>
+          <button class="btn-banner-cta" onclick="setQuickBooking()">Book a Test Now ➔</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 2: TESTS DIRECTORY PAGE                            -->
+    <!-- ======================================================== -->
+    <div id="page-tests" class="page-view">
+      <div class="page-header-banner">
+        <div class="container">
+          <span class="crumb-tag">DIAGNOSTIC TEST DIRECTORY</span>
+          <h1>All Tests & Laboratory Profiles</h1>
+          <p>Explore over 1,000+ certified pathology and specialized biochemical testing parameters with fast, accurate
+            digital turnaround.</p>
+        </div>
+      </div>
+
+      <div class="container" style="padding: 20px 0 60px;">
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon-wrap icon-red">🩸</div>
+            <h4>Complete Blood Count (CBC)</h4>
+            <p>24 parameters including Hb, TLC, DLC, Platelets, MCV, MCH. Requires EDTA blood sample.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹450 • Report in 4 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Complete Blood Count (CBC)')">Book CBC</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-crimson">❤️</div>
+            <h4>Lipid Profile & Cardiac Risk</h4>
+            <p>Total Cholesterol, HDL, LDL, VLDL, Triglycerides, and risk ratios. 10-12 hrs fasting required.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹850 • Report in 6 Hours</div>
+            <button class="btn-package" style="margin-top:10px;" onclick="selectPackageForBooking('Lipid Profile')">Book
+              Lipid Profile</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-maroon">🫀</div>
+            <h4>Liver Function Test (LFT)</h4>
+            <p>Total & Direct Bilirubin, SGOT, SGPT, Alkaline Phosphatase, Total Protein, Albumin.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹750 • Report in 6 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Liver Function Test (LFT)')">Book LFT</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-teal">🩺</div>
+            <h4>Kidney Function Test (KFT)</h4>
+            <p>Serum Creatinine, Blood Urea, BUN, Uric Acid, Calcium, Electrolytes (Sodium, Potassium).</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹750 • Report in 6 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Kidney Function Test (KFT)')">Book KFT</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-orange">🩸</div>
+            <h4>HbA1c & Diabetes Panel</h4>
+            <p>Glycated Hemoglobin, Average Blood Glucose over 3 months, and Fasting Plasma Sugar.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹650 • Report in 4 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Diabetic Care Package')">Book Diabetes Test</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-purple">🧬</div>
+            <h4>Thyroid Profile Total (T3, T4, TSH)</h4>
+            <p>Evaluation of hyperthyroidism, hypothyroidism, and metabolic regulation parameters.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹650 • Report in 6 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Thyroid Profile Total')">Book Thyroid Test</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-pink">💊</div>
+            <h4>Vitamin D & Vitamin B12 Combo</h4>
+            <p>Essential for bone integrity, neurological functions, immunity, and cellular vitality.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹1,100 • Report in 8 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Vitamin D & B12 Combo')">Book Vitamins</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon-wrap icon-rose">🎗️</div>
+            <h4>Cancer Marker Screen (PSA / CA-125)</h4>
+            <p>Tumor screening markers for prostate, ovarian, and gastrointestinal risk stratification.</p>
+            <div style="margin-top:12px; font-weight:800; color:#00897B;">₹2,200 • Report in 24 Hours</div>
+            <button class="btn-package" style="margin-top:10px;"
+              onclick="selectPackageForBooking('Full Body Checkup')">Book Cancer Screen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 3: HEALTH CHECKUP PACKAGES PAGE                     -->
+    <!-- ======================================================== -->
+    <div id="page-packages" class="page-view">
+      <div class="page-header-banner">
+        <div class="container">
+          <span class="crumb-tag">PREVENTIVE HEALTHCARE</span>
+          <h1>Comprehensive Health Checkup Packages</h1>
+          <p>Curated master health packages tailored for working professionals, diabetic care, and total family
+            wellness.</p>
+        </div>
+      </div>
+
+      <div class="container" style="padding: 20px 0 60px;">
+        <div class="packages-grid" style="grid-template-columns: repeat(2, 1fr); gap: 24px;">
+
+          <div class="package-card" style="padding:32px;">
+            <span class="pkg-icon" style="font-size:36px;">🩺</span>
+            <h3 style="font-size:22px; margin-top:8px;">Basic Health Checkup</h3>
+            <p class="pkg-tagline">24 Vital Parameters for routine health</p>
+            <div class="pkg-price-row" style="margin:16px 0;">
+              <span class="currency">₹</span><span class="amount">699</span>
+              <span class="original-price">₹1,200</span>
+            </div>
+            <ul style="list-style:none; padding:0; margin:16px 0; font-size:17.5px; color:#334155; line-height:2.1;">
+              <li>✔ Complete Blood Count (CBC - 24 tests)</li>
+              <li>✔ Fasting Blood Glucose (Sugar)</li>
+              <li>✔ Routine & Microscopic Urine Analysis</li>
+              <li>✔ Blood Group & Rh Factor</li>
+              <li>✔ Pathologist Verification & Summary</li>
+            </ul>
+            <button class="btn-package" onclick="selectPackageForBooking('Basic Health Checkup (₹699)')">Book Basic
+              Package (₹699)</button>
+          </div>
+
+          <div class="package-card popular" style="padding:32px;">
+            <div class="popular-badge">Most Recommended</div>
+            <span class="pkg-icon" style="font-size:36px;">⏱️</span>
+            <h3 style="font-size:22px; margin-top:8px;">Executive Health Checkup</h3>
+            <p class="pkg-tagline">58 Advanced Parameters for working executives</p>
+            <div class="pkg-price-row" style="margin:16px 0;">
+              <span class="currency">₹</span><span class="amount">1,499</span>
+              <span class="original-price">₹2,800</span>
+            </div>
+            <ul style="list-style:none; padding:0; margin:16px 0; font-size:17.5px; color:#334155; line-height:2.1;">
+              <li>✔ Complete Blood Count (CBC)</li>
+              <li>✔ Comprehensive Lipid Profile (Cholesterol, Triglycerides)</li>
+              <li>✔ Liver Function Test (LFT - 11 tests)</li>
+              <li>✔ Kidney Function Test (KFT - 8 tests)</li>
+              <li>✔ Thyroid Stimulating Hormone (TSH)</li>
+              <li>✔ Fasting Blood Sugar & Urine Screen</li>
+            </ul>
+            <button class="btn-package" onclick="selectPackageForBooking('Executive Health Checkup (₹1,499)')">Book
+              Executive Package (₹1,499)</button>
+          </div>
+
+          <div class="package-card" style="padding:32px;">
+            <span class="pkg-icon" style="font-size:36px;">🩸</span>
+            <h3 style="font-size:22px; margin-top:8px;">Diabetic Care Package</h3>
+            <p class="pkg-tagline">32 Parameters for glycemic & organ health</p>
+            <div class="pkg-price-row" style="margin:16px 0;">
+              <span class="currency">₹</span><span class="amount">899</span>
+              <span class="original-price">₹1,600</span>
+            </div>
+            <ul style="list-style:none; padding:0; margin:16px 0; font-size:17.5px; color:#334155; line-height:2.1;">
+              <li>✔ HbA1c (Glycated Hemoglobin)</li>
+              <li>✔ Fasting & Post-Prandial Blood Sugar</li>
+              <li>✔ Serum Creatinine & Microalbuminuria</li>
+              <li>✔ Lipid Profile (Cardiovascular Risk)</li>
+              <li>✔ Diabetic Dietician Advice Sheet</li>
+            </ul>
+            <button class="btn-package" onclick="selectPackageForBooking('Diabetic Care Package (₹899)')">Book Diabetic
+              Care (₹899)</button>
+          </div>
+
+          <div class="package-card featured" style="padding:32px;">
+            <div class="popular-badge" style="background:#0D9488;">Master Wellness</div>
+            <span class="pkg-icon" style="font-size:36px;">🛡️</span>
+            <h3 style="font-size:22px; margin-top:8px;">Full Body Checkup</h3>
+            <p class="pkg-tagline">84 Complete Parameters for Total Wellness</p>
+            <div class="pkg-price-row" style="margin:16px 0;">
+              <span class="currency">₹</span><span class="amount">2,499</span>
+              <span class="original-price">₹4,500</span>
+            </div>
+            <ul style="list-style:none; padding:0; margin:16px 0; font-size:17.5px; color:#334155; line-height:2.1;">
+              <li>✔ Everything in Executive Checkup (58 tests)</li>
+              <li>✔ Vitamin D (25-OH) & Vitamin B12 Total</li>
+              <li>✔ Complete Thyroid Panel (T3, T4, TSH)</li>
+              <li>✔ Iron Deficiency Profile (Ferritin, TIBC)</li>
+              <li>✔ Free Doorstep Home Sample Pickup</li>
+              <li>✔ Tele-consultation with MD Pathologist</li>
+            </ul>
+            <button class="btn-package" onclick="selectPackageForBooking('Full Body Checkup (₹2,499)')">Book Full Body
+              Package (₹2,499)</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 4: PATIENT GUIDE & PREPARATION                     -->
+    <!-- ======================================================== -->
+    <div id="page-guide" class="page-view">
+      <div class="page-header-banner">
+        <div class="container">
+          <span class="crumb-tag">PATIENT PREPARATION PROTOCOL</span>
+          <h1>Laboratory & Phlebotomy Guide</h1>
+          <p>Important instructions to ensure peak clinical accuracy for your diagnostic blood, urine, and metabolic
+            tests.</p>
+        </div>
+      </div>
+
+      <div class="container" style="padding: 20px 0 60px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+          <div style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:28px;">
+            <h3 style="font-size:20px; color:#00897B; margin-bottom:12px;">🥗 Fasting Instructions</h3>
+            <ul style="color:#334155; font-size:17.5px; line-height:1.9; padding-left:18px;">
+              <li><strong>10 - 12 Hours Fasting:</strong> Required for Lipid Profile, Fasting Blood Sugar, and Full Body
+                Checkups.</li>
+              <li><strong>Water is Allowed:</strong> You may drink plain water in normal amounts to remain hydrated.
+              </li>
+              <li><strong>Avoid Coffee & Tea:</strong> Caffeinated drinks and milk products can alter glucose and enzyme
+                parameters.</li>
+              <li><strong>No Alcohol:</strong> Avoid alcohol intake for 24 hours prior to liver and lipid assessments.
+              </li>
+            </ul>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:28px;">
+            <h3 style="font-size:20px; color:#00897B; margin-bottom:12px;">🧪 Urine & Stool Sample Protocol</h3>
+            <ul style="color:#334155; font-size:17.5px; line-height:1.9; padding-left:18px;">
+              <li><strong>Clean-Catch Midstream Urine:</strong> Discard the initial stream of urine and collect the
+                midstream portion.</li>
+              <li><strong>Sterile Containers:</strong> Only use sterile containers provided by HealthLab phlebotomists.
+              </li>
+              <li><strong>Morning Specimen:</strong> First-morning urine is preferred for routine analysis and pregnancy
+                tests.</li>
+              <li><strong>Timely Delivery:</strong> Submit collected sample to the lab within 2 hours or keep chilled.
+              </li>
+            </ul>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:28px;">
+            <h3 style="font-size:20px; color:#00897B; margin-bottom:12px;">🏠 Home Sample Collection Preparation</h3>
+            <ul style="color:#334155; font-size:17.5px; line-height:1.9; padding-left:18px;">
+              <li><strong>Phlebotomist Arrival:</strong> Our certified technician will arrive within your chosen 1-hour
+                slot.</li>
+              <li><strong>Safety Seals:</strong> Technicians open fresh disposable vacutainer needles in front of you.
+              </li>
+              <li><strong>SMS Tracking:</strong> You will receive technician name and temperature reading via SMS.</li>
+            </ul>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:28px;">
+            <h3 style="font-size:20px; color:#00897B; margin-bottom:12px;">📱 Digital Report Access</h3>
+            <ul style="color:#334155; font-size:17.5px; line-height:1.9; padding-left:18px;">
+              <li><strong>Instant Notification:</strong> An SMS and WhatsApp notification is sent when your report is
+                signed.</li>
+              <li><strong>Patient Portal:</strong> Use your booking reference (e.g. <code>HL-2026-001</code>) to track
+                test parameters anytime.</li>
+              <li><strong>Physical Copy:</strong> Free printed copy available at our Green Park diagnostic desk.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 5: ABOUT HEALTHLAB                                  -->
+    <!-- ======================================================== -->
+    <div id="page-about" class="page-view">
+      <div class="page-header-banner">
+        <div class="container">
+          <span class="crumb-tag">EXCELLENCE IN PATHOLOGY</span>
+          <h1>About HealthLab Diagnostic Centre</h1>
+          <p>Delivering precision, empathy, and advanced laboratory science to over 50,000+ satisfied families since
+            2012.</p>
+        </div>
+      </div>
+
+      <div class="container" style="padding: 20px 0 60px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; margin-bottom:48px;">
+          <div>
+            <h2 id="about-title-text" style="font-size:30px; font-weight:800; color:#0F172A; margin-bottom:16px;">
+              Precision Diagnostics with World-Class Infrastructure</h2>
+            <p id="about-story-text" style="color:#475569; font-size:16px; line-height:1.8; margin-bottom:16px;">
+              HealthLab Diagnostic Centre is an NABL-accredited (National Accreditation Board for Testing and
+              Calibration Laboratories) diagnostic and pathology establishment committed to providing accurate and
+              timely laboratory testing services. Our facility houses fully automated robotic immunoassay and clinical
+              chemistry platforms from world leaders such as Roche Cobas, Abbott Architect, and Beckman Coulter,
+              reducing human handling and delivering unparalleled accuracy.
+            </p>
+            <div style="display:flex; gap:16px;">
+              <div style="background:#E0F2F1; border-radius:10px; padding:14px 20px;">
+                <strong style="color:#00695C; font-size:22px; display:block;">100%</strong>
+                <span style="font-size:14px; color:#475569;">NABL Benchmarks</span>
+              </div>
+              <div style="background:#E0F2F1; border-radius:10px; padding:14px 20px;">
+                <strong id="about-badge-val" style="color:#00695C; font-size:22px; display:block;">14+ Years</strong>
+                <span id="about-badge-text" style="font-size:14px; color:#475569;">Clinical Experience</span>
+              </div>
+              <div style="background:#E0F2F1; border-radius:10px; padding:14px 20px;">
+                <strong style="color:#00695C; font-size:22px; display:block;">MD Pathologists</strong>
+                <span style="font-size:14px; color:#475569;">On-site Verification</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img src="/images/healthlab_clinic_interior.jpg" id="about-facility-img" alt="HealthLab Centre"
+              style="width:100%; border-radius:16px; box-shadow:var(--shadow-md);" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 6: CONTACT US PAGE                                  -->
+    <!-- ======================================================== -->
+    <div id="page-contact" class="page-view">
+      <div class="page-header-banner">
+        <div class="container">
+          <span class="crumb-tag">GET IN TOUCH</span>
+          <h1>Contact HealthLab Diagnostic Centre</h1>
+          <p>We are here to assist with home sample bookings, test queries, and specialized pathology consultations.</p>
+        </div>
+      </div>
+
+      <div class="container" style="padding: 20px 0 60px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px;">
+
+          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px;">
+            <h3 style="font-size:20px; font-weight:800; color:#0F172A; margin-bottom:14px;">Send an Inquiry to Our Lab
+            </h3>
+            <form id="contact-inquiry-form" class="booking-form">
+              <div class="form-group">
+                <label>Your Full Name *</label>
+                <input type="text" id="inq-name" required placeholder="e.g. Alok Roy" />
+              </div>
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label>Mobile Phone *</label>
+                  <input type="tel" id="inq-phone" required placeholder="10-digit mobile" />
+                </div>
+                <div class="form-group col-6">
+                  <label>Email Address *</label>
+                  <input type="email" id="inq-email" required placeholder="alok@example.com" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Subject / Test Inquiry</label>
+                <input type="text" id="inq-subject" placeholder="e.g. Home collection for senior citizen" />
+              </div>
+              <div class="form-group">
+                <label>Message / Doctor's Prescription Notes</label>
+                <textarea id="inq-message" rows="3" required
+                  placeholder="Describe tests prescribed or special requirements..."></textarea>
+              </div>
+              <button type="submit" class="btn-submit-booking">Send Message to Lab ➔</button>
+            </form>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div style="background:#F0FDF4; border:1px solid #DCFCE7; border-radius:16px; padding:28px;">
+              <h4 style="color:#166534; font-size:20px; font-weight:800; margin-bottom:10px;">📍 Centre Location</h4>
+              <p style="color:#334155; font-size:17.5px; line-height:1.75;">
+                123 Wellness Avenue, Green Park, New Delhi - 110016<br />
+                <strong>Landmark:</strong> Near Metro Gate #2<br />
+                <strong>Phone:</strong> +91 98765 43210<br />
+                <strong>Email:</strong> info@healthlab.in
+              </p>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:16px; padding:28px;">
+              <h4 style="color:#0F172A; font-size:20px; font-weight:800; margin-bottom:10px;">⏰ Operating Hours</h4>
+              <p style="color:#475569; font-size:17.5px; line-height:1.75;">
+                Monday - Saturday: 6:00 AM - 10:00 PM<br />
+                Sunday: 6:00 AM - 2:00 PM (Emergency testing 24/7)<br />
+                Home Collection: Starts daily at 6:30 AM
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 7: PATIENT CARE & REPORTS PORTAL                   -->
+    <!-- ======================================================== -->
+    <div id="page-portal" class="page-view">
+      <div class="page-header-banner">
+        <div class="container">
+          <span class="crumb-tag">DIAGNOSTIC REPORTS & PATHOLOGIST ADVICE</span>
+          <h1>Patient Care & Reports Portal</h1>
+          <p>Access your diagnostic test results, measured biochemical parameters, pathologist clinical remarks, and
+            official report slips.</p>
+        </div>
+      </div>
+
+      <div class="container portal-wrapper">
+        <!-- VIEW A: GUEST / LOOKUP & AUTH VIEW -->
+        <div id="portal-guest-view">
+          <div class="portal-dual-grid">
+
+            <!-- Quick Track by Booking Code or Mobile -->
+            <div class="portal-card-box">
+              <h3><span>🔍</span> Quick Diagnostic Report Tracker</h3>
+              <p class="sub" style="font-size:18px; line-height:1.75;">No login needed! Enter your <strong>Booking
+                  Code</strong> (e.g. <code>HL-2026-001</code>) or your <strong>registered mobile number</strong> to
+                view live diagnostic parameters and pathologist notes.</p>
+              <form id="portal-track-form">
+                <div class="form-group" style="margin-bottom:18px;">
+                  <label
+                    style="font-size:16px; font-weight:700; color:#334155; margin-bottom:8px; display:block;">Booking
+                    Code or Mobile Phone *</label>
+                  <input type="text" id="track-query-input" placeholder="e.g. HL-2026-001 or 9811122334" required
+                    style="width:100%; padding:14px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:16px;" />
+                </div>
+                <button type="submit" class="btn-submit-booking"
+                  style="padding:14px; font-size:17px; width:100%; font-weight:700;">
+                  Track & View Diagnostic Report ➔
+                </button>
+              </form>
+
+              <div
+                style="margin-top:22px; padding:16px; background:#F8FAFC; border-radius:10px; border:1px dashed #CBD5E1; font-size:16.5px; color:#475569; line-height:1.65;">
+                💡 <strong>Demo Quick Codes:</strong> Try tracking code <code>HL-2026-001</code> or phone
+                <code>9811122334</code> to inspect sample test findings.
+              </div>
+            </div>
+
+            <!-- Patient Account Login & Registration Card -->
+            <div class="portal-card-box">
+              <div class="portal-auth-tabs">
+                <button type="button" class="portal-tab-pill active" id="tab-btn-login"
+                  onclick="switchPortalAuthTab('login')" style="font-size:16px; padding:10px 18px;">Patient Sign
+                  In</button>
+                <button type="button" class="portal-tab-pill" id="tab-btn-register"
+                  onclick="switchPortalAuthTab('register')" style="font-size:16px; padding:10px 18px;">New Patient
+                  Register</button>
+              </div>
+
+              <!-- Login Form -->
+              <div id="portal-auth-login-wrap">
+                <h3><span>🔐</span> Patient Portal Account</h3>
+                <p class="sub" style="font-size:18px; line-height:1.75;">Sign in to securely access all past laboratory
+                  reports, biomarker trends, and physician advice in one place.</p>
+                <form id="portal-login-form">
+                  <div class="form-group" style="margin-bottom:16px;">
+                    <label
+                      style="font-size:16px; font-weight:700; color:#334155; margin-bottom:8px; display:block;">Registered
+                      Phone or Email *</label>
+                    <input type="text" id="login-identifier" placeholder="e.g. +91 98111 22334 or email" required
+                      style="width:100%; padding:14px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:16px;" />
+                  </div>
+                  <div class="form-group" style="margin-bottom:20px;">
+                    <label
+                      style="font-size:16px; font-weight:700; color:#334155; margin-bottom:8px; display:block;">Password
+                      *</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required
+                      style="width:100%; padding:14px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:16px;" />
+                  </div>
+                  <button type="submit" class="btn-submit-booking"
+                    style="padding:14px; font-size:17px; width:100%; font-weight:700;">
+                    Sign In to Portal ➔
+                  </button>
+                </form>
+                <div style="margin-top:16px; font-size:16px; color:#475569; line-height:1.6;">
+                  🔑 Demo credentials: Phone <code>+91 98111 22334</code> / Password <code>patient123</code>
+                </div>
+              </div>
+
+              <!-- Register Form -->
+              <div id="portal-auth-register-wrap" style="display:none;">
+                <h3><span>📝</span> Register Patient Profile</h3>
+                <p class="sub" style="font-size:18px; line-height:1.75;">Create an account to keep your family's
+                  diagnostic records consolidated.</p>
+                <form id="portal-register-form">
+                  <div class="form-group" style="margin-bottom:14px;">
+                    <label
+                      style="font-size:15px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Patient
+                      Full Name *</label>
+                    <input type="text" id="reg-name" placeholder="e.g. Rajesh Gupta" required
+                      style="width:100%; padding:12px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:15.5px;" />
+                  </div>
+                  <div class="form-group" style="margin-bottom:14px;">
+                    <label
+                      style="font-size:15px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Mobile
+                      Phone Number *</label>
+                    <input type="tel" id="reg-phone" placeholder="e.g. 9811122334" required
+                      style="width:100%; padding:12px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:15.5px;" />
+                  </div>
+                  <div class="form-group" style="margin-bottom:14px;">
+                    <label
+                      style="font-size:15px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Email
+                      Address (Optional)</label>
+                    <input type="email" id="reg-email" placeholder="rajesh@example.com"
+                      style="width:100%; padding:12px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:15.5px;" />
+                  </div>
+                  <div class="form-group" style="margin-bottom:18px;">
+                    <label
+                      style="font-size:15px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Create
+                      Password *</label>
+                    <input type="password" id="reg-password" placeholder="At least 6 characters" required minlength="6"
+                      style="width:100%; padding:12px 16px; border:1px solid #CBD5E1; border-radius:10px; font-size:15.5px;" />
+                  </div>
+                  <button type="submit" class="btn-submit-booking"
+                    style="padding:14px; font-size:16px; width:100%; font-weight:700;">
+                    Create Account ➔
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW B: ACTIVE DASHBOARD (For Logged-In Patient or Tracked Query Results) -->
+        <div id="portal-user-view" style="display:none;">
+          <!-- Top Dashboard Bar -->
+          <div class="portal-dashboard-header">
+            <div class="portal-user-info">
+              <h3 id="portal-user-name" style="font-size:24px; font-weight:800;">Welcome Back</h3>
+              <p id="portal-user-meta" style="font-size:15px; color:#64748B; margin-top:4px;">Viewing live laboratory
+                records from HealthLab database</p>
+            </div>
+            <div class="portal-header-actions">
+              <button class="btn-portal-action" onclick="setQuickBooking()" style="font-size:15px; padding:10px 18px;">+
+                Book Test</button>
+              <button type="button" class="btn-portal-action" id="btn-portal-logout" onclick="logoutPatient()"
+                style="font-size:15px; padding:10px 18px;">Sign Out / Exit</button>
+            </div>
+          </div>
+
+          <!-- Section Heading -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+            <h3 style="font-size:22px; font-weight:800; color:#0F172A;">Diagnostic History & Reports (<span
+                id="portal-appt-count">0</span>)</h3>
+            <span style="font-size:15px; color:#64748B; font-weight:700;">NABL Verified Laboratory Sign-off</span>
+          </div>
+
+          <!-- Bookings List with Doctor Notes & Measured Parameters -->
+          <div id="portal-appointments-container" class="portal-appts-list">
+            <!-- Dynamically rendered cards -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER (Matches Reference Mockup)                         -->
+  <!-- ========================================================= -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <div class="logo-mark footer-logo">
+          <span class="plus-icon">+</span>
+        </div>
+        <h3 id="footer-brand-title">HealthLab Diagnostic Centre</h3>
+        <p id="footer-about-text">Accurate Reports. Healthier Lives. Certified pathology diagnostic care equipped with
+          international standard robotic analyzers.</p>
+        <div class="social-links">
+          <a href="javascript:void(0)" id="footer-link-fb">Facebook</a>
+          <a href="javascript:void(0)" id="footer-link-ig">Instagram</a>
+          <a href="javascript:void(0)" id="footer-link-yt">YouTube</a>
+          <a href="javascript:void(0)" id="footer-link-tw">Twitter</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul id="footer-quick-links">
+          <li><a href="/home" onclick="navigateTo('home')">Home</a></li>
+          <li><a href="/about" onclick="navigateTo('about')">About Us</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Tests & Packages</a></li>
+          <li><a href="/packages" onclick="navigateTo('packages')">Health Checkup</a></li>
+          <li><a href="/portal" onclick="navigateTo('portal')">Patient Portal (Reports)</a></li>
+          <li><a href="/contact" onclick="navigateTo('contact')">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="/tests" onclick="navigateTo('tests')">Blood Tests</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Urine Tests</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Hormone Tests</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Diabetes Tests</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Liver & Kidney Tests</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Heart Health Tests</a></li>
+          <li><a href="/tests" onclick="navigateTo('tests')">Vitamin & Mineral Tests</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/guide" onclick="navigateTo('guide')">Preparation FAQs</a></li>
+          <li><a href="/portal" onclick="navigateTo('portal')">Report Download</a></li>
+          <li><a href="/guide" onclick="navigateTo('guide')">Sample Collection</a></li>
+          <li><a href="/about" onclick="navigateTo('about')">Quality Policy</a></li>
+          <li><a href="/about" onclick="navigateTo('about')">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col newsletter-col">
+        <h4>Subscribe to Our Newsletter</h4>
+        <p>Get health tips and exclusive offers delivered to your inbox.</p>
+        <form id="newsletter-form" class="newsletter-form"
+          onsubmit="event.preventDefault(); showWebToast('Thank you for subscribing to HealthLab health updates!'); this.reset();">
+          <input type="email" placeholder="Enter your email address" required />
+          <button type="submit">➔</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container bottom-inner">
+        <p id="footer-copyright">© 2026 HealthLab Diagnostic Centre. All rights reserved.</p>
+        <p id="footer-emergency-notice">Accurate Reports. Healthier Lives. ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: Booking Confirmation Dialog -->
+  <div id="booking-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" id="modal-close" onclick="closeWebModals()">&times;</span>
+      <div class="modal-body text-center">
+        <div class="modal-success-icon">✅</div>
+        <h3 id="modal-title">Booking Confirmed!</h3>
+        <p id="modal-message">Your diagnostic test has been registered successfully.</p>
+        <div class="modal-details-card" id="modal-details"></div>
+        <button class="btn-primary" id="modal-ok-btn" onclick="closeWebModals()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Official Diagnostic Report Slip -->
+  <div class="modal" id="modal-diagnostic-slip">
+    <div class="modal-content" style="max-width:680px; text-align:left;">
+      <div
+        style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #00897B; padding-bottom:12px; margin-bottom:16px;">
+        <div>
+          <h3 style="font-size:20px; font-weight:800; color:#00897B; margin:0;">HealthLab Diagnostic Centre</h3>
+          <p style="font-size:12px; color:#64748B; margin:2px 0 0;">NABL Certified Pathology • 123 Wellness Ave, Green
+            Park, New Delhi • +91 98765 43210</p>
+        </div>
+        <button onclick="closeWebModals()"
+          style="background:none; border:none; font-size:22px; cursor:pointer; color:#64748B;">✕</button>
+      </div>
+
+      <div id="modal-slip-body">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div
+        style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px; border-top:1px solid #E2E8F0; padding-top:14px;">
+        <button class="btn-print-slip" onclick="window.print()">🖨️ Print Diagnostic Slip</button>
+        <button class="btn-primary" onclick="closeWebModals()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+
+</html>

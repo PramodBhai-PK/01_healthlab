@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthLab Admin Portal - Diagnostic Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-badge">+</div>
+        <div class="brand-info">
+          <h2>HealthLab</h2>
+          <p>Admin Portal</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="nav-section-title">LAB OPERATIONS</div>
+        <a href="javascript:void(0)" class="menu-item active" data-view="dashboard">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="bookings">
+          <span class="icon">📋</span>
+          <span>All Bookings</span>
+          <span class="badge-count" id="pending-badge">0</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="services">
+          <span class="icon">🔬</span>
+          <span>Diagnostic Services</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="packages">
+          <span class="icon">📦</span>
+          <span>Health Packages</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="inquiries">
+          <span class="icon">✉️</span>
+          <span>Patient Inquiries</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="patients">
+          <span class="icon">👥</span>
+          <span>Registered Patients</span>
+          <span class="badge-count" id="patients-badge" style="background:#0284C7;">0</span>
+        </a>
+
+        <div class="nav-section-title">WEBSITE CMS & CONTENT</div>
+        <a href="javascript:void(0)" class="menu-item" data-view="header-menus">
+          <span class="icon">📑</span>
+          <span>Header & Menus</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="hero-cms">
+          <span class="icon">🖼️</span>
+          <span>Hero Banner & Stats</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="doctor-hospital">
+          <span class="icon">👨‍⚕️</span>
+          <span>Pathologist & Facility</span>
+        </a>
+        <a href="javascript:void(0)" class="menu-item" data-view="about-footer">
+          <span class="icon">🏛️</span>
+          <span>About & Footer</span>
+        </a>
+
+        <a href="http://localhost:3001" target="_blank" class="menu-item external">
+          <span class="icon">🌐</span>
+          <span>View Live Website ↗</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-pill" style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="user-avatar">👨‍⚕️</div>
+            <div class="user-meta">
+              <strong id="admin-display-name">Dr. Rajesh Malhotra</strong>
+              <span>Medical Director</span>
+            </div>
+          </div>
+          <button id="btn-admin-logout" onclick="logoutAdminSession()" title="Sign Out" style="background:none; border:none; color:#EF4444; font-size:18px; cursor:pointer; padding:4px;">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <h1 id="page-heading">Diagnostic Operations Dashboard</h1>
+          <span class="db-status-chip">🟢 MySQL: healthlab_db (Connected)</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn-new-booking" id="btn-open-create-modal">+ New Test Booking</button>
+          <button class="btn-refresh" id="btn-refresh-data" title="Refresh Live Data">🔄 Refresh</button>
+        </div>
+      </header>
+
+      <!-- KPI Metrics Strip -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:#E0F2F1; color:#00897B;">📋</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Total Bookings</span>
+            <h3 class="kpi-val" id="stat-total">0</h3>
+            <span class="kpi-trend">All-time diagnostic requests</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;">⏳</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Pending Approval</span>
+            <h3 class="kpi-val" id="stat-pending">0</h3>
+            <span class="kpi-trend text-amber">Needs phlebotomy schedule</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:#DCFCE7; color:#16A34A;">✅</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Confirmed / Scheduled</span>
+            <h3 class="kpi-val" id="stat-confirmed">0</h3>
+            <span class="kpi-trend text-green">Sample collection active</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;">📄</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Completed Reports</span>
+            <h3 class="kpi-val" id="stat-completed">0</h3>
+            <span class="kpi-trend">Reports dispatched</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookings Management Section -->
+      <section id="sec-bookings" class="admin-panel-card">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <h2>Patient Test Bookings</h2>
+            <p>Real-time laboratory and home collection appointments.</p>
+          </div>
+          <div class="panel-controls">
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+              <button class="tab-btn active" data-status="all">All</button>
+              <button class="tab-btn" data-status="pending">Pending</button>
+              <button class="tab-btn" data-status="confirmed">Confirmed</button>
+              <button class="tab-btn" data-status="completed">Completed</button>
+              <button class="tab-btn" data-status="cancelled">Cancelled</button>
+            </div>
+            <!-- Search -->
+            <input type="text" id="table-search" placeholder="Search by patient, phone or code..." class="search-input" />
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ref Code</th>
+                <th>Patient Details</th>
+                <th>Test / Package</th>
+                <th>Schedule</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Quick Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-tbody">
+              <tr>
+                <td colspan="7" class="text-center py-4">Loading patient records from MySQL...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Registered Patients Section -->
+      <section id="sec-patients" class="admin-panel-card" style="display:none;">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <h2>Registered Patient Accounts</h2>
+            <p>Patient profiles registered via Mobile App & Website</p>
+          </div>
+          <input type="text" id="patient-search-input" placeholder="Search patient name, phone..." class="search-input" style="width:260px;" />
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Registration Date</th>
+                <th>Total Bookings</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="patients-tbody">
+              <tr><td colspan="7" class="text-center py-4">Loading patient user accounts...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Services & Packages Quick View -->
+      <div id="sec-dashboard-split" class="split-cards-row">
+        <!-- Diagnostic Services Section -->
+        <section class="admin-panel-card col-half">
+          <div class="panel-header">
+            <h3>Active Diagnostic Tests</h3>
+            <span class="badge-total" id="services-count">10 Services</span>
+          </div>
+          <div id="services-list" class="simple-list">
+            <!-- Filled dynamically -->
+          </div>
+        </section>
+
+        <!-- Health Packages Section -->
+        <section class="admin-panel-card col-half">
+          <div class="panel-header">
+            <h3>Health Checkup Packages</h3>
+            <span class="badge-total" id="packages-count">4 Packages</span>
+          </div>
+          <div id="packages-list" class="simple-list">
+            <!-- Filled dynamically -->
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= CMS VIEW 1: HEADER & MENUS ================= -->
+      <div id="sec-header-menus" class="cms-view-pane" style="display:none;">
+        <div class="cms-card-box">
+          <h3>🧭 Top-Bar Strip & Site Header CMS</h3>
+          <p style="color:#64748B; font-size:13px; margin-bottom:18px;">Customize the announcement banner, helpline, brand titles, and action buttons</p>
+          <form id="header-cms-form" class="modal-form">
+            <div class="form-row">
+              <div class="f-col">
+                <label>Site Brand Name</label>
+                <input type="text" id="hdr-brand-name" placeholder="HealthLab" required />
+              </div>
+              <div class="f-col">
+                <label>Brand Tagline</label>
+                <input type="text" id="hdr-tagline" placeholder="Diagnostic Centre" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Top-Bar Accreditation Badge</label>
+                <input type="text" id="hdr-badge-text" placeholder="NABL Certified & ISO 9001:2015" required />
+              </div>
+              <div class="f-col">
+                <label>Working Hours Notice</label>
+                <input type="text" id="hdr-working-hours" placeholder="⏰ Mon - Sun, 6:00 AM - 10:00 PM" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Helpline Phone Number</label>
+                <input type="text" id="hdr-helpline" placeholder="+91 98765 43210" required />
+              </div>
+              <div class="f-col">
+                <label>Contact Email</label>
+                <input type="email" id="hdr-email" placeholder="care@healthlab.in" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Patient Portal Button Text</label>
+                <input type="text" id="hdr-portal-btn" placeholder="Patient Portal" required />
+              </div>
+              <div class="f-col">
+                <label>Book Button Text</label>
+                <input type="text" id="hdr-book-btn" placeholder="Book a Test" required />
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Header & Top-Bar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cms-card-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <h3 style="margin:0;">🔗 Navigation Menu Manager</h3>
+              <p style="color:#64748B; font-size:13px; margin:4px 0 0;">Add, edit, reorder, or toggle visibility of navigation links shown in the top navbar</p>
+            </div>
+            <button type="button" class="btn-submit" onclick="openNewMenuModal()">+ Add Menu Link</button>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Menu Label</th>
+                  <th>Route Identifier</th>
+                  <th>Target URL</th>
+                  <th>Visibility</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="menus-tbody">
+                <tr><td colspan="6" class="text-center py-4">Loading navigation menus...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= CMS VIEW 2: HERO BANNER & STATS ================= -->
+      <div id="sec-hero-cms" class="cms-view-pane" style="display:none;">
+        <div class="cms-card-box">
+          <h3>🖼️ Hero Banner & Main Visual</h3>
+          <p style="color:#64748B; font-size:13px; margin-bottom:18px;">Edit hero headline, subtext, action buttons, floating badges, and replace the hero lab visual</p>
+          <form id="hero-cms-form" class="modal-form">
+            <div class="f-group">
+              <label>Hero Eyebrow Tag</label>
+              <input type="text" id="hero-eyebrow" placeholder="YOUR HEALTH. OUR PRIORITY." required />
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Headline Prefix (Dark Text)</label>
+                <input type="text" id="hero-title-prefix" placeholder="Complete Diagnostic Care for a" required />
+              </div>
+              <div class="f-col">
+                <label>Headline Highlight (Highlighted Color)</label>
+                <input type="text" id="hero-title-highlight" placeholder="Healthier Tomorrow" required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label>Hero Subtext / Summary</label>
+              <textarea id="hero-subtext" rows="3" required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Primary Button Text</label>
+                <input type="text" id="hero-btn1-text" placeholder="Book a Test Now ➔" required />
+              </div>
+              <div class="f-col">
+                <label>Primary Button Link</label>
+                <input type="text" id="hero-btn1-link" placeholder="#booking" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Secondary Button Text</label>
+                <input type="text" id="hero-btn2-text" placeholder="View Health Packages" required />
+              </div>
+              <div class="f-col">
+                <label>Secondary Button Link</label>
+                <input type="text" id="hero-btn2-link" placeholder="/packages" required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label>Hero Banner Photo (Scientist / Pathology Visual)</label>
+              <div class="img-upload-field">
+                <img id="hero-img-preview" src="/images/healthlab_hero_scientist.jpg" class="img-thumb-preview" alt="Hero Preview" />
+                <div style="flex:1;">
+                  <label class="btn-file-label">
+                    📁 Upload Image File
+                    <input type="file" id="hero-img-file-input" accept="image/*" style="display:none;" onchange="handleCmsImageUpload(this, 'hero-image-url', 'hero-img-preview')" />
+                  </label>
+                  <div style="margin-top:8px;">
+                    <span style="font-size:12px; color:#64748B;">Or enter URL:</span>
+                    <input type="text" id="hero-image-url" placeholder="/images/healthlab_hero_scientist.jpg" style="width:100%; margin-top:4px;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Floating Top Badge / Quote</label>
+                <input type="text" id="hero-badge-top" placeholder="Health Begins with Awareness ❤️" />
+              </div>
+              <div class="f-col">
+                <label>Floating Bottom Badge / Rating</label>
+                <input type="text" id="hero-badge-bottom" placeholder="⭐ 4.8/5 Rating • 50,000+ Tests Processed" />
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Hero Banner</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cms-card-box">
+          <h3>✨ 4 Hero Feature Badges (Assurances)</h3>
+          <form id="hero-features-form" class="modal-form">
+            <div class="card-grid-2">
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Feature 1</h4>
+                <div class="f-group"><label>Title</label><input type="text" id="feat-1-title" placeholder="Home Sample Collection" required /></div>
+                <div class="f-group"><label>Subtitle</label><input type="text" id="feat-1-sub" placeholder="Trained Phlebotomists" required /></div>
+              </div>
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Feature 2</h4>
+                <div class="f-group"><label>Title</label><input type="text" id="feat-2-title" placeholder="Accurate Reports" required /></div>
+                <div class="f-group"><label>Subtitle</label><input type="text" id="feat-2-sub" placeholder="Same-Day Turnaround" required /></div>
+              </div>
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Feature 3</h4>
+                <div class="f-group"><label>Title</label><input type="text" id="feat-3-title" placeholder="NABL Certified Lab" required /></div>
+                <div class="f-group"><label>Subtitle</label><input type="text" id="feat-3-sub" placeholder="ISO 9001:2015 Standards" required /></div>
+              </div>
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Feature 4</h4>
+                <div class="f-group"><label>Title</label><input type="text" id="feat-4-title" placeholder="Affordable Pricing" required /></div>
+                <div class="f-group"><label>Subtitle</label><input type="text" id="feat-4-sub" placeholder="Transparent Test Costs" required /></div>
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Feature Cards</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cms-card-box">
+          <h3>📊 Floating Stats Bar (Key Numbers)</h3>
+          <form id="stats-cms-form" class="modal-form">
+            <div class="card-grid-2">
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Stat 1</h4>
+                <div class="form-row">
+                  <div class="f-col"><label>Value</label><input type="text" id="stat-1-val" placeholder="50,000+" required /></div>
+                  <div class="f-col"><label>Label</label><input type="text" id="stat-1-lbl" placeholder="Happy Patients" required /></div>
+                </div>
+              </div>
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Stat 2</h4>
+                <div class="form-row">
+                  <div class="f-col"><label>Value</label><input type="text" id="stat-2-val" placeholder="1,000+" required /></div>
+                  <div class="f-col"><label>Label</label><input type="text" id="stat-2-lbl" placeholder="Tests & Profiles" required /></div>
+                </div>
+              </div>
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Stat 3</h4>
+                <div class="form-row">
+                  <div class="f-col"><label>Value</label><input type="text" id="stat-3-val" placeholder="4.8 / 5" required /></div>
+                  <div class="f-col"><label>Label</label><input type="text" id="stat-3-lbl" placeholder="Patient Rating" required /></div>
+                </div>
+              </div>
+              <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:16px; border-radius:10px;">
+                <h4 style="font-size:14px; margin-bottom:10px; color:#0F172A;">Stat 4</h4>
+                <div class="form-row">
+                  <div class="f-col"><label>Value</label><input type="text" id="stat-4-val" placeholder="NABL" required /></div>
+                  <div class="f-col"><label>Label</label><input type="text" id="stat-4-lbl" placeholder="Certified Laboratory" required /></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Stats Counter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ================= CMS VIEW 3: PATHOLOGIST & FACILITY ================= -->
+      <div id="sec-doctor-hospital" class="cms-view-pane" style="display:none;">
+        <div class="cms-card-box">
+          <h3>👨‍⚕️ Pathologist & Medical Director Profile</h3>
+          <p style="color:#64748B; font-size:13px; margin-bottom:18px;">Manage the chief pathologist's public bio, qualifications, credentials, and photo</p>
+          <form id="doc-cms-form" class="modal-form">
+            <div class="form-row">
+              <div class="f-col">
+                <label>Full Name</label>
+                <input type="text" id="doc-name" placeholder="Dr. Rajesh Sharma" required />
+              </div>
+              <div class="f-col">
+                <label>Degrees & Credentials</label>
+                <input type="text" id="doc-degrees" placeholder="MBBS, MD (Pathology), MIAP" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Specialization Title</label>
+                <input type="text" id="doc-spec" placeholder="Chief Pathologist & Laboratory Director" required />
+              </div>
+              <div class="f-col">
+                <label>Years of Clinical Experience</label>
+                <input type="number" id="doc-exp" min="1" max="60" required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label>OPD & Consultation Schedule</label>
+              <input type="text" id="doc-opd" placeholder="Mon - Sat: 08:00 AM - 04:00 PM" required />
+            </div>
+            <div class="f-group">
+              <label>Professional Biography</label>
+              <textarea id="doc-bio" rows="4" required></textarea>
+            </div>
+            <div class="f-group">
+              <label>Key Highlights (One per line)</label>
+              <textarea id="doc-highlights" rows="4" placeholder="18+ Years of Pathology & Clinical Diagnostics&#10;Fellow of the Indian Association of Pathologists&#10;Over 500,000 Diagnostic Reports Supervised&#10;External Quality Assurance (EQAS) Coordinator"></textarea>
+            </div>
+            <div class="f-group">
+              <label>Doctor / Pathologist Photo</label>
+              <div class="img-upload-field">
+                <img id="doc-img-preview" src="/images/healthlab_hero_scientist.jpg" class="img-thumb-preview" alt="Doctor Preview" />
+                <div style="flex:1;">
+                  <label class="btn-file-label">
+                    📁 Upload Doctor Photo
+                    <input type="file" id="doc-img-file-input" accept="image/*" style="display:none;" onchange="handleCmsImageUpload(this, 'doc-image-url', 'doc-img-preview')" />
+                  </label>
+                  <div style="margin-top:8px;">
+                    <span style="font-size:12px; color:#64748B;">Or enter URL:</span>
+                    <input type="text" id="doc-image-url" placeholder="/images/healthlab_hero_scientist.jpg" style="width:100%; margin-top:4px;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Pathologist Profile</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cms-card-box">
+          <h3>🏥 Diagnostic Facility & Center Details</h3>
+          <form id="clinic-cms-form" class="modal-form">
+            <div class="form-row">
+              <div class="f-col">
+                <label>Center / Lab Name</label>
+                <input type="text" id="clinic-name" placeholder="HealthLab Diagnostic & Research Centre" required />
+              </div>
+              <div class="f-col">
+                <label>Helpline Phone</label>
+                <input type="text" id="clinic-phone" placeholder="+91 98765 43210" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Emergency / Same-Day Query Line</label>
+                <input type="text" id="clinic-emergency" placeholder="+91 98765 43211" required />
+              </div>
+              <div class="f-col">
+                <label>Official Email</label>
+                <input type="email" id="clinic-email" placeholder="care@healthlab.in" required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label>Operating & Sample Collection Timings</label>
+              <input type="text" id="clinic-timings" placeholder="Mon - Sun: 06:00 AM - 10:00 PM (Sample Collection 06:30 AM onwards)" required />
+            </div>
+            <div class="f-group">
+              <label>Full Physical Address</label>
+              <textarea id="clinic-address" rows="3" required></textarea>
+            </div>
+            <div class="f-group">
+              <label>Directions & Landmark Guidance</label>
+              <textarea id="clinic-directions" rows="2" placeholder="Opposite Metro Gate 3, Hauz Khas. Wheelchair and stretcher accessible."></textarea>
+            </div>
+            <div class="f-group">
+              <label>Facility Interior Photo</label>
+              <div class="img-upload-field">
+                <img id="clinic-img-preview" src="/images/healthlab_clinic_interior.jpg" class="img-thumb-preview" alt="Facility Preview" />
+                <div style="flex:1;">
+                  <label class="btn-file-label">
+                    📁 Upload Facility Photo
+                    <input type="file" id="clinic-img-file-input" accept="image/*" style="display:none;" onchange="handleCmsImageUpload(this, 'clinic-image-url', 'clinic-img-preview')" />
+                  </label>
+                  <div style="margin-top:8px;">
+                    <span style="font-size:12px; color:#64748B;">Or enter URL:</span>
+                    <input type="text" id="clinic-image-url" placeholder="/images/healthlab_clinic_interior.jpg" style="width:100%; margin-top:4px;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Facility Details</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ================= CMS VIEW 4: ABOUT & FOOTER ================= -->
+      <div id="sec-about-footer" class="cms-view-pane" style="display:none;">
+        <div class="cms-card-box">
+          <h3>📄 About Us Page & Mission Story</h3>
+          <form id="about-cms-form" class="modal-form">
+            <div class="f-group">
+              <label>About Us Headline</label>
+              <input type="text" id="about-title" placeholder="Precision Diagnostics with World-Class Infrastructure" required />
+            </div>
+            <div class="f-group">
+              <label>Experience Badge Tag</label>
+              <input type="text" id="about-badge" placeholder="14+ Years of Precision Pathology Excellence" required />
+            </div>
+            <div class="f-group">
+              <label>Diagnostic Excellence Story</label>
+              <textarea id="about-story" rows="4" required></textarea>
+            </div>
+            <div class="f-group">
+              <label>Facility Photo</label>
+              <div class="img-upload-field">
+                <img id="about-img-preview" src="/images/healthlab_clinic_interior.jpg" class="img-thumb-preview" alt="About Preview" />
+                <div style="flex:1;">
+                  <label class="btn-file-label">
+                    📁 Upload Facility Photo
+                    <input type="file" id="about-img-file-input" accept="image/*" style="display:none;" onchange="handleCmsImageUpload(this, 'about-image-url', 'about-img-preview')" />
+                  </label>
+                  <div style="margin-top:8px;">
+                    <span style="font-size:12px; color:#64748B;">Or enter URL:</span>
+                    <input type="text" id="about-image-url" placeholder="/images/healthlab_clinic_interior.jpg" style="width:100%; margin-top:4px;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save About Us</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cms-card-box">
+          <h3>🦶 Footer & Social Media Links</h3>
+          <form id="footer-cms-form" class="modal-form">
+            <div class="f-group">
+              <label>Footer Description</label>
+              <textarea id="footer-about" rows="3" required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="f-col">
+                <label>Copyright Notice</label>
+                <input type="text" id="footer-copyright" placeholder="© 2026 HealthLab Diagnostic Centre. All rights reserved." required />
+              </div>
+              <div class="f-col">
+                <label>Emergency Query Notice</label>
+                <input type="text" id="footer-emergency" placeholder="For urgent same-day report queries or emergency tests, call +91 98765 43211." />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="f-col"><label>Facebook URL</label><input type="url" id="footer-fb" placeholder="https://facebook.com/healthlab" /></div>
+              <div class="f-col"><label>Instagram URL</label><input type="url" id="footer-ig" placeholder="https://instagram.com/healthlab" /></div>
+            </div>
+            <div class="form-row">
+              <div class="f-col"><label>Twitter / X URL</label><input type="url" id="footer-tw" placeholder="https://twitter.com/healthlab" /></div>
+              <div class="f-col"><label>YouTube URL</label><input type="url" id="footer-yt" placeholder="https://youtube.com/healthlab" /></div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start; margin-top:16px;">
+              <button type="submit" class="btn-submit">💾 Save Footer & Social</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Create Manual Booking Modal -->
+  <div id="create-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="modal-hdr">
+        <h3>Create New Test Booking</h3>
+        <button class="btn-close" id="btn-close-modal">&times;</button>
+      </div>
+      <form id="create-booking-form" class="modal-form">
+        <div class="form-row">
+          <div class="f-col">
+            <label>Patient Full Name *</label>
+            <input type="text" id="new-name" required placeholder="e.g. Ramesh Chandra" />
+          </div>
+          <div class="f-col">
+            <label>Phone Number *</label>
+            <input type="tel" id="new-phone" required placeholder="+91 98765 43210" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="f-col">
+            <label>Email Address</label>
+            <input type="email" id="new-email" placeholder="patient@example.com" />
+          </div>
+          <div class="f-col">
+            <label>Test or Health Package *</label>
+            <select id="new-test" required>
+              <option value="Basic Health Checkup">Basic Health Checkup (₹699)</option>
+              <option value="Executive Health Checkup" selected>Executive Health Checkup (₹1,499)</option>
+              <option value="Diabetic Care Package">Diabetic Care Package (₹899)</option>
+              <option value="Full Body Checkup">Full Body Checkup (₹2,499)</option>
+              <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
+              <option value="Lipid Profile">Lipid Profile</option>
+              <option value="Liver Function Test">Liver Function Test</option>
+              <option value="Kidney Function Test">Kidney Function Test</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="f-col">
+            <label>Date *</label>
+            <input type="date" id="new-date" required />
+          </div>
+          <div class="f-col">
+            <label>Time Slot *</label>
+            <input type="text" id="new-time" value="09:00 AM" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="f-col">
+            <label>Visit Type</label>
+            <select id="new-visit-type">
+              <option value="lab_visit">Lab Visit (Walk-in)</option>
+              <option value="home_collection">Home Sample Collection</option>
+            </select>
+          </div>
+          <div class="f-col">
+            <label>Initial Status</label>
+            <select id="new-status">
+              <option value="pending">Pending</option>
+              <option value="confirmed" selected>Confirmed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="f-group">
+          <label>Address (if Home Collection)</label>
+          <input type="text" id="new-address" placeholder="Address with Landmark..." />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="btn-cancel-modal">Cancel</button>
+          <button type="submit" class="btn-submit">Save Booking to MySQL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Doctor Notes, Test Results & Prescriptions Entry -->
+  <div class="modal" id="modal-doctor-notes">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3>🩺 Pathologist Findings & Clinical Advice</h3>
+          <p id="doc-notes-patient-meta" style="font-size:12.5px; color:#64748B; margin-top:2px;">Patient: Loading... | Ref: HL-2026-001</p>
+        </div>
+        <button class="modal-close" id="btn-close-notes-modal">✕</button>
+      </div>
+
+      <form id="doctor-notes-form" class="modal-form">
+        <input type="hidden" id="notes-booking-id" />
+
+        <div class="f-group" style="margin-bottom:14px;">
+          <label>Pathologist Clinical Observations & Summary *</label>
+          <textarea id="notes-doctor-observations" rows="3" required placeholder="Enter clinical assessment, test interpretations, or patient vitality summary..."></textarea>
+        </div>
+
+        <div class="f-group" style="margin-bottom:14px;">
+          <label>Diagnostic Test Parameters & Measured Values (One per line)</label>
+          <textarea id="notes-test-results" rows="4" placeholder="e.g.&#10;Fasting Blood Glucose: 94 mg/dL (Normal: 70-100)&#10;HbA1c: 5.4% (Normal: < 5.7%)&#10;Serum Vitamin D (25-OH): 18.2 ng/mL (Deficient)"></textarea>
+        </div>
+
+        <div class="f-group" style="margin-bottom:14px;">
+          <label>Doctor Prescriptions, Diet & Follow-Up Advice</label>
+          <textarea id="notes-doctor-prescription" rows="3" placeholder="e.g.&#10;1. Vitamin D3 60k once weekly for 8 weeks&#10;2. Low glycemic index diet, brisk walking&#10;3. Fasting re-test in 3 months"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="f-col">
+            <label>Next Recommended Review Date</label>
+            <input type="date" id="notes-followup-date" />
+          </div>
+          <div class="f-col">
+            <label>Update Booking Status</label>
+            <select id="notes-status-select">
+              <option value="confirmed">Confirmed</option>
+              <option value="sample_collected">Sample Collected</option>
+              <option value="completed" selected>Completed / Report Ready</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="btn-cancel-notes-modal">Cancel</button>
+          <button type="submit" class="btn-submit">Publish Report & Advice to Patient Portal</button>
+        </div>
+      </form>
+    </div>
+  <!-- Modal: Add/Edit Navigation Menu Item -->
+  <div class="modal" id="modal-menu-item">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-menu-title">+ Add Navigation Menu Item</h3>
+        <button class="modal-close" id="btn-close-menu-modal">✕</button>
+      </div>
+      <form id="menu-item-form" class="modal-form">
+        <input type="hidden" id="menu-item-id" />
+        <div>
+          <label>Menu Label</label>
+          <input type="text" id="menu-item-label" placeholder="e.g. Diagnostic Packages" required />
+        </div>
+        <div>
+          <label>Route Identifier (Lowercase, e.g. packages, tests, report)</label>
+          <input type="text" id="menu-item-route" placeholder="e.g. packages" required />
+        </div>
+        <div>
+          <label>Target URL / Path</label>
+          <input type="text" id="menu-item-url" placeholder="e.g. /packages" required />
+        </div>
+        <div>
+          <label>Display Order</label>
+          <input type="number" id="menu-item-order" min="1" max="99" value="8" required />
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+          <input type="checkbox" id="menu-item-active" checked style="width:18px; height:18px; margin:0;" />
+          <label for="menu-item-active" style="margin:0; cursor:pointer;">Visible in Navigation Bar</label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="btn-cancel-menu-modal">Cancel</button>
+          <button type="submit" class="btn-submit">Save Menu Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Authentication Modal Overlay -->
+  <div id="admin-auth-overlay" class="modal-backdrop open" style="display: flex; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #ffffff; width: 100%; max-width: 420px; padding: 36px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); border: 1px solid #E2E8F0; text-align: center;">
+      <div style="width: 64px; height: 64px; background: #E0F2FE; color: #0284C7; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 16px;">🔐</div>
+      <h2 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Admin Authentication</h2>
+      <p style="font-size: 13px; color: #64748B; margin: 0 0 24px;">Please enter your credentials to access the clinical management dashboard.</p>
+      
+      <form id="admin-login-form">
+        <div style="text-align: left; margin-bottom: 16px;">
+          <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Username or Admin Email</label>
+          <input type="text" id="admin-user-input" value="admin" required style="width: 100%; padding: 12px 14px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 14px; outline: none;" placeholder="e.g. admin" />
+        </div>
+        
+        <div style="text-align: left; margin-bottom: 24px;">
+          <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Admin Password</label>
+          <input type="password" id="admin-pass-input" value="admin123" required style="width: 100%; padding: 12px 14px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 14px; outline: none;" placeholder="••••••••" />
+        </div>
+
+        <div id="admin-auth-error" style="display: none; background: #FEF2F2; color: #DC2626; padding: 10px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; border: 1px solid #FCA5A5;"></div>
+
+        <button type="submit" style="width: 100%; padding: 14px; background: #0284C7; color: #ffffff; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer;">
+          Unlock Admin Portal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
