@@ -25,7 +25,11 @@ const publicDir = fs_1.default.existsSync(path_1.default.join(__dirname, '../pub
         : path_1.default.resolve(process.cwd(), '../web/public'));
 const imagesDir = fs_1.default.existsSync(path_1.default.join(publicDir, 'images'))
     ? path_1.default.join(publicDir, 'images')
-    : publicDir;
+    : (fs_1.default.existsSync(path_1.default.resolve(process.cwd(), 'web/public/images'))
+        ? path_1.default.resolve(process.cwd(), 'web/public/images')
+        : (fs_1.default.existsSync(path_1.default.resolve(__dirname, '../../web/public/images'))
+            ? path_1.default.resolve(__dirname, '../../web/public/images')
+            : publicDir));
 const uploadsDir = path_1.default.join(imagesDir, 'uploads');
 if (!fs_1.default.existsSync(uploadsDir)) {
     fs_1.default.mkdirSync(uploadsDir, { recursive: true });
@@ -828,14 +832,22 @@ async function initSiteContentTable() {
 // -------------------------------------------------------------
 // UNIFIED FRONTEND SERVING (Web & Admin Panel for Live Deploy)
 // -------------------------------------------------------------
-const adminDist = path_1.default.join(publicDir, 'admin');
+const adminDist = fs_1.default.existsSync(path_1.default.join(publicDir, 'admin'))
+    ? path_1.default.join(publicDir, 'admin')
+    : (fs_1.default.existsSync(path_1.default.resolve(process.cwd(), 'admin/dist'))
+        ? path_1.default.resolve(process.cwd(), 'admin/dist')
+        : path_1.default.resolve(__dirname, '../../admin/dist'));
 if (fs_1.default.existsSync(adminDist)) {
     app.use('/admin', express_1.default.static(adminDist));
     app.get(['/admin', '/admin/*'], (_req, res) => {
         res.sendFile(path_1.default.join(adminDist, 'index.html'));
     });
 }
-const webDist = path_1.default.join(publicDir, 'web');
+const webDist = fs_1.default.existsSync(path_1.default.join(publicDir, 'web'))
+    ? path_1.default.join(publicDir, 'web')
+    : (fs_1.default.existsSync(path_1.default.resolve(process.cwd(), 'web/dist'))
+        ? path_1.default.resolve(process.cwd(), 'web/dist')
+        : path_1.default.resolve(__dirname, '../../web/dist'));
 if (fs_1.default.existsSync(webDist)) {
     app.use(express_1.default.static(webDist));
     app.get('*', (req, res, next) => {

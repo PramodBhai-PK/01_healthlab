@@ -24,7 +24,11 @@ const publicDir = fs.existsSync(path.join(__dirname, '../public'))
 
 const imagesDir = fs.existsSync(path.join(publicDir, 'images'))
   ? path.join(publicDir, 'images')
-  : publicDir;
+  : (fs.existsSync(path.resolve(process.cwd(), 'web/public/images'))
+      ? path.resolve(process.cwd(), 'web/public/images')
+      : (fs.existsSync(path.resolve(__dirname, '../../web/public/images'))
+          ? path.resolve(__dirname, '../../web/public/images')
+          : publicDir));
 
 const uploadsDir = path.join(imagesDir, 'uploads');
 if (!fs.existsSync(uploadsDir)) {
@@ -876,7 +880,12 @@ async function initSiteContentTable() {
 // -------------------------------------------------------------
 // UNIFIED FRONTEND SERVING (Web & Admin Panel for Live Deploy)
 // -------------------------------------------------------------
-const adminDist = path.join(publicDir, 'admin');
+const adminDist = fs.existsSync(path.join(publicDir, 'admin'))
+  ? path.join(publicDir, 'admin')
+  : (fs.existsSync(path.resolve(process.cwd(), 'admin/dist'))
+      ? path.resolve(process.cwd(), 'admin/dist')
+      : path.resolve(__dirname, '../../admin/dist'));
+
 if (fs.existsSync(adminDist)) {
   app.use('/admin', express.static(adminDist));
   app.get(['/admin', '/admin/*'], (_req: Request, res: Response) => {
@@ -884,7 +893,12 @@ if (fs.existsSync(adminDist)) {
   });
 }
 
-const webDist = path.join(publicDir, 'web');
+const webDist = fs.existsSync(path.join(publicDir, 'web'))
+  ? path.join(publicDir, 'web')
+  : (fs.existsSync(path.resolve(process.cwd(), 'web/dist'))
+      ? path.resolve(process.cwd(), 'web/dist')
+      : path.resolve(__dirname, '../../web/dist'));
+
 if (fs.existsSync(webDist)) {
   app.use(express.static(webDist));
   app.get('*', (req: Request, res: Response, next: any) => {
